@@ -1,0 +1,21 @@
+# cFS build artifacts
+cfs/build/
+cfs/*/build/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Basilisk build (if you ever build from source instead of pip)
+basilisk_build/
+
+# Data/logs you don't want bloating the repo
+results/logs/*
+!results/logs/.gitkeep
+
+# OS/editor cruft
+.DS_Store
+.vscode/
+*.swp

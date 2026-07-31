@@ -1,0 +1,3 @@
+Basilisk==2.11.1
+-e git+https://github.com/AVSLab/basilisk.git@87cb4116e09694ddf6587f61a7f4196d2e720c43#egg=bsk
+pyzmq==27.1.0
