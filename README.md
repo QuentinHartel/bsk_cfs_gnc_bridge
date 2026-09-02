@@ -17,12 +17,33 @@ connects them — built to understand how these pieces fit together in
 practice, not just in theory.
 
 ## Architecture
-┌─────────────────┐ ZeroMQ ┌──────────────────┐
-│ Basilisk │ ─── sensor data ──► │ cFS (gnc_app) │
-│ (dynamics, │ │ Attitude det. │
-│ sensors, │ ◄── actuator cmds ── │ + control law │
-│ actuators) │ │ │
-└─────────────────┘ └──────────────────┘
+```mermaid
+flowchart LR
+    subgraph BSK["Basilisk — Truth Simulation"]
+        DYN["Dynamics (orbit + attitude propagation)"]
+        SENS["Sensor models (gyro, star tracker, etc.)"]
+        ACT["Actuator models (reaction wheels, etc.)"]
+        DYN --> SENS
+        ACT --> DYN
+    end
+
+    subgraph BRIDGE["ZeroMQ Bridge"]
+        direction TB
+        PUB["Publish sensor data"]
+        SUB["Subscribe actuator cmds"]
+    end
+
+    subgraph CFS["cFS — gnc_app"]
+        AD["Attitude Determination (TRIAD / EKF)"]
+        CTRL["Control Law (detumble / pointing)"]
+        AD --> CTRL
+    end
+
+    SENS -- "sensor msg" --> PUB
+    PUB -- "sensor msg" --> AD
+    CTRL -- "actuator cmd" --> SUB
+    SUB -- "actuator cmd" --> ACT
+```
 
 Basilisk propagates spacecraft dynamics and simulates sensor output
 (gyro, star tracker, etc.). That data is streamed to a cFS application
