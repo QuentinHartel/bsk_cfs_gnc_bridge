@@ -1,3 +1,5 @@
-Basilisk==2.11.1
--e git+https://github.com/AVSLab/basilisk.git@87cb4116e09694ddf6587f61a7f4196d2e720c43#egg=bsk
+# Basilisk 2.10.2 — not distributed via pip, built from source.
+# See docs/basilisk_setup.md for build instructions (tag v2.10.2).
+matplotlib==3.10.7
+numpy==2.3.5
 pyzmq==27.1.0
