@@ -19,3 +19,6 @@ results/logs/*
 .DS_Store
 .vscode/
 *.swp
+
+# Personal Notes
+.selfNote
